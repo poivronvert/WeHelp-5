@@ -1,0 +1,70 @@
+/*設定字型*/
+body{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin:0 auto;
+    padding:0;
+
+}
+.header{
+    display:flex;
+    margin:0 auto;
+    justify-content: space-between;
+}
+
+.title{
+    padding:0 10px;
+}
+
+.items{
+    display:flex;
+    align-content: flex-end;
+}
+.item{
+    padding:0 10px;
+}
+.greeting{
+    height: 250px;
+    font-size: 200%;
+    background-color:lightblue;
+    text-align: center;
+    line-height: 250px;
+}
+/*small boxes*/
+
+
+/*big boxes*/
+
+
+/*判別裝置的尺寸*/
+/*螢幕尺寸為359px(含)以下*/
+@media screen (max-width:359px){
+    .container{
+        max-width:90%;
+    }
+}
+/*螢幕尺寸為360-600px(含)以下*/
+@media screen (min-width:360px) and(max-width:595px){
+    .container{
+        max-width:90%;
+    }
+}
+
+/*螢幕尺寸為601px-1200px(含)以下*/
+@media screen (min-width:600px) and(max-width:1200px){
+    .container{
+        max-width:1200px;
+    }
+}
+
+/*螢幕尺寸為1201px-1920px(含)以下*/
+@media screen (min-width:1201px)and(max-width:1920px){
+    .container{
+    }
+}
+
+/*螢幕尺寸為1921px(含)以上*/
+@media screen (min-width:1921px){
+    .container{
+    }
+}
