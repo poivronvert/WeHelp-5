@@ -1,5 +1,4 @@
-/*設定字型*/
-body{
+body{ /*設定字型、統一設定margin及padding*/
     font-size: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin:0 auto;
@@ -7,64 +6,183 @@ body{
 
 }
 .header{
-    display:flex;
-    margin:0 auto;
-    justify-content: space-between;
+    display:flex;/*header下方子元件要水平排列*/
+    justify-content: space-between;/*子元件各靠左及靠右對齊*/
 }
 
 .title{
-    padding:0 10px;
+    padding:0 10px;/*設定內邊距*/
 }
 
 .items{
-    display:flex;
-    align-content: flex-end;
+    display:flex;/*items要水平排列*/
+    align-content: flex-end;/*items靠右對齊*/
 }
 .item{
-    padding:0 10px;
+    padding:0 10px;/*設定內邊距*/
 }
 .greeting{
     height: 250px;
-    font-size: 200%;
+    font-size: 2rem;/*字體兩倍大小*/
     background-color:lightblue;
-    text-align: center;
-    line-height: 250px;
+    text-align: center;/*水平對齊*/
+    line-height: 250px;/*div高=行距高實現垂直對齊*/
 }
-/*small boxes*/
+.content{ /*讓gird子元素置中*/
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    margin:30px;
+}
 
+.main{
+    width:1200px;
+    display:grid;
+    grid-gap:20px;
+    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows:repeat(7,1fr);
+    border: red 5px solid;
+}
+
+/*small boxes*/
+.sb1{
+    display:flex;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height:50px;
+    background-color: lightblue;
+    text-align: center;
+}
+.sb2{
+    display:flex;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    height:50px;
+    background-color: lightblue;
+    text-align: center;    
+}
+.sb3{
+    display:flex;
+    grid-column-start: 5;
+    grid-column-end: 7;  
+    height:50px;  
+    background-color: lightblue;
+    text-align: center;
+
+}
+.sp{
+    width:80px;
+    height:50px;
+}
 
 /*big boxes*/
+.lb1,.lb2,.lb3,.lb4,.lb5,.lb6,.lb7,.lb8,.lb9,.lb10{
+    background-image: url("black-whale.jpg");
+    background-size:cover;
+    background-position:center;
+}
+
+.lb1{
+    grid-column-start:1;
+    grid-column-end:3;
+    grid-row-start:2;
+    grid-row-end:5;
+}
+.lb2{
+    grid-column-start:3;
+    grid-column-end:4;
+    grid-row-start:2;
+    grid-row-end:5;
+}
+.lb3{
+    grid-column-start:4;
+    grid-column-end:5;
+    grid-row-start:2;
+    grid-row-end:5;
+}
+.lb4{
+    grid-column-start:5;
+    grid-column-end:6;
+    grid-row-start:2;
+    grid-row-end:5;
+}
+.lb5{
+    grid-column-start:6;
+    grid-column-end:7;
+    grid-row-start:2;
+    grid-row-end:5;
+}
+.lb6{
+    grid-column-start:1;
+    grid-column-end:3;
+    grid-row-start:5;
+    grid-row-end:8;
+}
+.lb7{
+    grid-column-start:3;
+    grid-column-end:4;
+    grid-row-start:5;
+    grid-row-end:8;
+}
+.lb8{
+    grid-column-start:4;
+    grid-column-end:5;
+    grid-row-start:5;
+    grid-row-end:8;
+}
+.lb9{
+    grid-column-start:5;
+    grid-column-end:6;
+    grid-row-start:5;
+    grid-row-end:8;
+}
+.lb10{
+    grid-column-start:6;
+    grid-column-end:7;
+    grid-row-start:5;
+    grid-row-end:8;
+}
+.lb6{
+    grid-column-start:1;
+    grid-column-end:3;
+    grid-row-start:5;
+    grid-row-end:8;
+}
 
 
 /*判別裝置的尺寸*/
 /*螢幕尺寸為359px(含)以下*/
-@media screen (max-width:359px){
+@media (max-width:359px){
     .container{
         max-width:90%;
+        background-color: red;
     }
 }
 /*螢幕尺寸為360-600px(含)以下*/
-@media screen (min-width:360px) and(max-width:595px){
+@media (min-width:360px) and (max-width:595px){
     .container{
         max-width:90%;
+        background-color:yellow;
     }
 }
 
 /*螢幕尺寸為601px-1200px(含)以下*/
-@media screen (min-width:600px) and(max-width:1200px){
+@media (min-width:600px) and (max-width:1200px){
     .container{
-        max-width:1200px;
+        background-color:blue;
     }
 }
 
 /*螢幕尺寸為1201px-1920px(含)以下*/
-@media screen (min-width:1201px)and(max-width:1920px){
+@media (min-width:1201px) and (max-width:1920px){
     .container{
+        background-color:purple;
     }
 }
 
 /*螢幕尺寸為1921px(含)以上*/
-@media screen (min-width:1921px){
+@media (min-width:1921px){
     .container{
+        background-color:black;
     }
 }
