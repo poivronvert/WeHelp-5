@@ -5,16 +5,11 @@ body{ /*設定字型、統一設定margin及padding*/
     padding:0;
 
 }
-.header{
-    display:flex;/*header下方子元件要水平排列*/
-    justify-content: space-between;/*子元件各靠左及靠右對齊*/
-}
+
 
 .title{
     padding:0 10px;/*設定內邊距*/
 }
-
-
 .greeting{
     height: 250px;
     font-size: 2rem;/*字體兩倍大小*/
@@ -38,9 +33,17 @@ body{ /*設定字型、統一設定margin及padding*/
     right: 10px;
 }
 
+/*隱藏核許框*/
+    input#menu {
+        display: none;
+}
 /*判別裝置的尺寸*/
 /*螢幕尺寸為600px(含)以下*/
 @media (max-width:600px){
+    .header{
+        display:flex;/*header下方子元件要水平排列*/
+        justify-content:space-between;
+    }
     .container{
         width:90%;
         display:grid;
@@ -48,20 +51,18 @@ body{ /*設定字型、統一設定margin及padding*/
         grid-template-columns:1fr;
         grid-template-rows:repeat(33,1fr);
     }
-    HTML CSSResult Skip Results Iframe
-    EDIT ON
-    /*
-    選單線
-    */
+    /*選單線*/
     .line {
         width: 24px;
         height: 24px;
         background: #FFF;
         cursor: pointer;
         display: block;
-        padding: 16px;
         position: fixed;
-        z-index: 2;
+        right:5px;
+        top:5px;
+        padding: 6px;
+        z-index:2;
     }
     .line .menu,
     .line .menu::before,
@@ -71,24 +72,22 @@ body{ /*設定字型、統一設定margin及padding*/
         display: block;
         height: 1px;
         position: absolute;
-        transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+        transition: background ease .3s,top ease .3s .3s, transform ease .3s;
         width: 20px;
     }
-    .line .menu {
-        right: 0px;
-        top: 27px;
-    }
     
+    .line .menu{
+        left:10px;
+        top:27px;
+    }
     .line .menu::before {
-        top: -6px;
+        top:-6px;
     }
     
     .line .menu::after {
         top: 6px;
     }
-    /*
-    點選選單變叉叉
-    */
+    /*點選選單變叉叉*/
     #menu:checked + .line .menu {
         background: transparent;
     }
@@ -107,15 +106,13 @@ body{ /*設定字型、統一設定margin及padding*/
         transition: top ease .3s, transform ease .3s .3s;
     }
     
-    /*
-    選單開合
-    */
+    /*選單開合*/
     #menu:checked ~ .items {
         width: 200px;
+        right: 0;
     }
     
     .items {
-        width: 60px;
         height: 100vh;
         background: #FFF;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
@@ -124,32 +121,24 @@ body{ /*設定字型、統一設定margin及padding*/
         z-index: 1;
         transition: all .6s;
         overflow: hidden;
+        width:0;
+        right:-200px;
+        top:0;
+        display:flex;
+        flex-direction: column; 
+        align-items: flex-start;
+
     }
-    /*
-    選單向外推
-    */
-    .items ul {
-        list-style: none;
-        margin-left:70px;
+    /*選單向外推*/
+    .items div{
+        margin-right:100px;
         padding: 0;
     }
-    .items ul>li{
+    .items div>p{
         display:block;
         width:100px;
     }
-    /*
-    隱藏核許框
-    */
-    input#menu {
-     display: none;
-    }
-    .items{
-        display:flex;/*items要水平排列*/
-        align-content: flex-end;/*items靠右對齊*/
-    }
-    .item{
-        padding:0 10px;/*設定內邊距*/
-    }
+
     .sb1{
         display:flex;
         height:50px;
@@ -363,6 +352,11 @@ body{ /*設定字型、統一設定margin及padding*/
 
 /*螢幕尺寸為601px-1200px(含)以下*/
 @media (min-width:601px) and (max-width:1200px){
+    .header{
+        display:flex;/*header下方子元件要水平排列*/
+        width:100%;
+        justify-content: space-between;/*子元件各靠左及靠右對齊*/
+    }
     .container{
         width:90%;
         display:grid;
@@ -600,6 +594,11 @@ body{ /*設定字型、統一設定margin及padding*/
 
 /*螢幕尺寸為1201px-1920px(含)以下*/
 @media (min-width:1201px){
+    .header{
+        display:flex;/*header下方子元件要水平排列*/
+        width:100%;
+        justify-content: space-between;/*子元件各靠左及靠右對齊*/
+    }
     .container{
         width:1200px;
         display:grid;
