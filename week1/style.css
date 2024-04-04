@@ -39,7 +39,7 @@ body{ /*設定字型、統一設定margin及padding*/
 }
 /*判別裝置的尺寸*/
 /*螢幕尺寸為600px(含)以下*/
-@media (max-width:600px){
+@media (device-width<600px){
     .header{
         display:flex;/*header下方子元件要水平排列*/
         justify-content:space-between;
@@ -126,7 +126,7 @@ body{ /*設定字型、統一設定margin及padding*/
         top:0;
         display:flex;
         flex-direction: column; 
-        align-items: flex-start;
+        align-items: center;
 
     }
     /*選單向外推*/
@@ -351,7 +351,7 @@ body{ /*設定字型、統一設定margin及padding*/
 }
 
 /*螢幕尺寸為601px-1200px(含)以下*/
-@media (min-width:601px) and (max-width:1200px){
+@media (601px < device-width <=1200px){
     .header{
         display:flex;/*header下方子元件要水平排列*/
         width:100%;
@@ -593,7 +593,7 @@ body{ /*設定字型、統一設定margin及padding*/
 }
 
 /*螢幕尺寸為1201px-1920px(含)以下*/
-@media (min-width:1201px){
+@media (device-width>1201px){
     .header{
         display:flex;/*header下方子元件要水平排列*/
         width:100%;
