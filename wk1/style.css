@@ -14,13 +14,7 @@ body{ /*設定字型、統一設定margin及padding*/
     padding:0 10px;/*設定內邊距*/
 }
 
-.items{
-    display:flex;/*items要水平排列*/
-    align-content: flex-end;/*items靠右對齊*/
-}
-.item{
-    padding:0 10px;/*設定內邊距*/
-}
+
 .greeting{
     height: 250px;
     font-size: 2rem;/*字體兩倍大小*/
@@ -35,154 +29,825 @@ body{ /*設定字型、統一設定margin及padding*/
     margin:30px;
 }
 
-.main{
-    width:1200px;
-    display:grid;
-    grid-gap:20px;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows:repeat(7,1fr);
-    border: red 5px solid;
+.star {
+    content: url("star1.png"); /* 使用content属性添加星星图片路径 */
+    width: 15px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
-
-/*small boxes*/
-.sb1{
-    display:flex;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    height:50px;
-    background-color: lightblue;
-    text-align: center;
-}
-.sb2{
-    display:flex;
-    grid-column-start: 3;
-    grid-column-end: 5;
-    height:50px;
-    background-color: lightblue;
-    text-align: center;    
-}
-.sb3{
-    display:flex;
-    grid-column-start: 5;
-    grid-column-end: 7;  
-    height:50px;  
-    background-color: lightblue;
-    text-align: center;
-
-}
-.sp{
-    width:80px;
-    height:50px;
-}
-
-/*big boxes*/
-.lb1,.lb2,.lb3,.lb4,.lb5,.lb6,.lb7,.lb8,.lb9,.lb10{
-    background-image: url("black-whale.jpg");
-    background-size:cover;
-    background-position:center;
-}
-
-.lb1{
-    grid-column-start:1;
-    grid-column-end:3;
-    grid-row-start:2;
-    grid-row-end:5;
-}
-.lb2{
-    grid-column-start:3;
-    grid-column-end:4;
-    grid-row-start:2;
-    grid-row-end:5;
-}
-.lb3{
-    grid-column-start:4;
-    grid-column-end:5;
-    grid-row-start:2;
-    grid-row-end:5;
-}
-.lb4{
-    grid-column-start:5;
-    grid-column-end:6;
-    grid-row-start:2;
-    grid-row-end:5;
-}
-.lb5{
-    grid-column-start:6;
-    grid-column-end:7;
-    grid-row-start:2;
-    grid-row-end:5;
-}
-.lb6{
-    grid-column-start:1;
-    grid-column-end:3;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-.lb7{
-    grid-column-start:3;
-    grid-column-end:4;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-.lb8{
-    grid-column-start:4;
-    grid-column-end:5;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-.lb9{
-    grid-column-start:5;
-    grid-column-end:6;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-.lb10{
-    grid-column-start:6;
-    grid-column-end:7;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-.lb6{
-    grid-column-start:1;
-    grid-column-end:3;
-    grid-row-start:5;
-    grid-row-end:8;
-}
-
 
 /*判別裝置的尺寸*/
-/*螢幕尺寸為359px(含)以下*/
-@media (max-width:359px){
+/*螢幕尺寸為600px(含)以下*/
+@media (max-width:600px){
     .container{
-        max-width:90%;
-        background-color: red;
+        width:90%;
+        display:grid;
+        grid-gap:20px;
+        grid-template-columns:1fr;
+        grid-template-rows:repeat(33,1fr);
     }
-}
-/*螢幕尺寸為360-600px(含)以下*/
-@media (min-width:360px) and (max-width:595px){
-    .container{
-        max-width:90%;
-        background-color:yellow;
+    HTML CSSResult Skip Results Iframe
+    EDIT ON
+    /*
+    選單線
+    */
+    .line {
+        width: 24px;
+        height: 24px;
+        background: #FFF;
+        cursor: pointer;
+        display: block;
+        padding: 16px;
+        position: fixed;
+        z-index: 2;
+    }
+    .line .menu,
+    .line .menu::before,
+    .line .menu::after {
+        background: #222;
+        content: '';
+        display: block;
+        height: 1px;
+        position: absolute;
+        transition: background ease .3s, top ease .3s .3s, transform ease .3s;
+        width: 20px;
+    }
+    .line .menu {
+        right: 0px;
+        top: 27px;
+    }
+    
+    .line .menu::before {
+        top: -6px;
+    }
+    
+    .line .menu::after {
+        top: 6px;
+    }
+    /*
+    點選選單變叉叉
+    */
+    #menu:checked + .line .menu {
+        background: transparent;
+    }
+    
+    #menu:checked + .line .menu::before {
+        transform: rotate(45deg);
+    }
+    
+    #menu:checked + .line .menu::after {
+        transform: rotate(-45deg);
+    }
+    
+    #menu:checked + .line .menu::before,
+    #menu:checked + .line .menu::after {
+        top: 0;
+        transition: top ease .3s, transform ease .3s .3s;
+    }
+    
+    /*
+    選單開合
+    */
+    #menu:checked ~ .items {
+        width: 200px;
+    }
+    
+    .items {
+        width: 60px;
+        height: 100vh;
+        background: #FFF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        padding-top: 60px;
+        position: fixed;
+        z-index: 1;
+        transition: all .6s;
+        overflow: hidden;
+    }
+    /*
+    選單向外推
+    */
+    .items ul {
+        list-style: none;
+        margin-left:70px;
+        padding: 0;
+    }
+    .items ul>li{
+        display:block;
+        width:100px;
+    }
+    /*
+    隱藏核許框
+    */
+    input#menu {
+     display: none;
+    }
+    .items{
+        display:flex;/*items要水平排列*/
+        align-content: flex-end;/*items靠右對齊*/
+    }
+    .item{
+        padding:0 10px;/*設定內邊距*/
+    }
+    .sb1{
+        display:flex;
+        height:50px;
+        background-color: lightblue;
+        position: relative;
+    }    
+    .sb2{
+        display:flex;
+        height:50px;
+        background-color: lightblue;
+    }
+    .sb3{
+        display:flex; 
+        height:50px; 
+        background-color: lightblue;
+        text-align: center;
+
+    }
+    .promotion{
+        position: relative;
+        line-height: 50px;
+        left:15px;
+    }
+    .sp{
+        width:80px;
+        height:50px;
+    }
+    
+    /*big boxes*/
+    .lb1,.lb2,.lb3,.lb4,.lb5,.lb6,.lb7,.lb8,.lb9,.lb10{
+        background-image: url("black-whale.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+    
+    .lb1{
+        grid-row-start: 4;
+        grid-row-end: 7;
+        position: relative;
+    }
+    
+    .lb1::before {
+        content: "Title 1";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    
+    
+    .lb2{
+        grid-row-start: 7;
+        grid-row-end: 10;
+        position: relative;
+    }
+    
+    .lb2::before {
+        content: "Title 2";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb3{
+        grid-row-start: 10;
+        grid-row-end: 13;
+        position: relative;
+    }
+    .lb3::before {
+        content: "Title 3";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb4{
+        grid-row-start: 13;
+        grid-row-end: 16;
+        position: relative;
+    }
+    .lb4::before {
+        content: "Title 4";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb5{
+        grid-row-start: 16;
+        grid-row-end: 19;
+        position: relative;
+    }
+    .lb5::before {
+        content: "Title 5";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb6{
+        grid-row-start: 19;
+        grid-row-end: 22;
+        position: relative;
+    }
+    .lb6::before {
+        content: "Title 6";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb7{
+        grid-row-start: 22;
+        grid-row-end: 25;
+        position: relative;
+    }
+    .lb7::before {
+        content: "Title 7";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb8{
+        grid-row-start: 25;
+        grid-row-end: 28;
+        position: relative;
+    }
+    .lb8::before {
+        content: "Title 8";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb9{
+        grid-row-start: 28;
+        grid-row-end: 31;
+        position: relative;
+    }
+    .lb9::before {
+        content: "Title 9";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb10{
+        grid-row-start: 31;
+        grid-row-end: 34;
+        position: relative;
+    }
+    .lb10::before {
+        content: "Title 10";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
     }
 }
 
 /*螢幕尺寸為601px-1200px(含)以下*/
-@media (min-width:600px) and (max-width:1200px){
+@media (min-width:601px) and (max-width:1200px){
     .container{
-        background-color:blue;
+        width:90%;
+        display:grid;
+        grid-gap:20px;
+        grid-template-columns:1fr 1fr 1fr 1fr;
+        grid-template-rows:repeat(12,1fr);
+    }
+    .items{
+        display:flex;/*items要水平排列*/
+        align-content: flex-end;/*items靠右對齊*/
+    }
+    .item{
+        padding:0 10px;/*設定內邊距*/
+    }
+    .sb1{
+        display:flex;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        height:50px;
+        background-color: lightblue;
+        position: relative;
+    }    
+    .sb2{
+        display:flex;
+        grid-column-start: 3;
+        grid-column-end: 5;
+        height:50px;
+        background-color: lightblue;
+    }
+    .sb3{
+        display:flex; 
+        height:50px;
+        grid-column-start:1;
+        grid-column-end: 5; 
+        background-color: lightblue;
+        text-align: center;
+
+    }
+    .promotion{
+        position: relative;
+        line-height: 50px;
+        left:15px;
+    }
+    .sp{
+        width:80px;
+        height:50px;
+    }
+    
+    /*big boxes*/
+    .lb1,.lb2,.lb3,.lb4,.lb5,.lb6,.lb7,.lb8,.lb9,.lb10{
+        background-image: url("black-whale.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+    
+    .lb1{
+        grid-row-start: 3;
+        grid-row-end: 6;
+        position: relative;
+    }
+    
+    .lb1::before {
+        content: "Title 1";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    
+    
+    .lb2{
+        grid-row-start: 3;
+        grid-row-end: 6;
+        position: relative;
+    }
+    
+    .lb2::before {
+        content: "Title 2";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb3{
+        grid-row-start: 3;
+        grid-row-end: 6;
+        position: relative;
+    }
+    .lb3::before {
+        content: "Title 3";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb4{
+        grid-row-start: 3;
+        grid-row-end: 6;
+        position: relative;
+    }
+    .lb4::before {
+        content: "Title 4";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb5{
+        grid-row-start: 6;
+        grid-row-end: 9;
+        position: relative;
+    }
+    .lb5::before {
+        content: "Title 5";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb6{
+        grid-row-start: 6;
+        grid-row-end: 9;
+        position: relative;
+    }
+    .lb6::before {
+        content: "Title 6";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb7{
+        grid-row-start: 6;
+        grid-row-end: 9;
+        position: relative;
+    }
+    .lb7::before {
+        content: "Title 7";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb8{
+        grid-row-start: 6;
+        grid-row-end: 9;
+        position: relative;
+    }
+    .lb8::before {
+        content: "Title 8";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb9{
+        grid-column-start:1;
+        grid-column-end:3;
+        grid-row-start: 9;
+        grid-row-end: 12;
+        position: relative;
+    }
+    .lb9::before {
+        content: "Title 9";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb10{
+        grid-column-start:3;
+        grid-column-end:5;
+        grid-row-start: 9;
+        grid-row-end: 12;
+        position: relative;
+    }
+    .lb10::before {
+        content: "Title 10";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
     }
 }
 
 /*螢幕尺寸為1201px-1920px(含)以下*/
-@media (min-width:1201px) and (max-width:1920px){
+@media (min-width:1201px){
     .container{
-        background-color:purple;
+        width:1200px;
+        display:grid;
+        grid-gap:20px;
+        grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows:repeat(7,1fr);
     }
-}
-
-/*螢幕尺寸為1921px(含)以上*/
-@media (min-width:1921px){
-    .container{
-        background-color:black;
+    .items{
+        display:flex;/*items要水平排列*/
+        align-content: flex-end;/*items靠右對齊*/
+    }
+    .item{
+        padding:0 10px;/*設定內邊距*/
+    }
+    /*small boxes*/
+    .sb1{
+        display:flex;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        height:50px;
+        background-color: lightblue;
+        position: relative;
+    }    .sb2{
+        display:flex;
+        grid-column-start: 3;
+        grid-column-end: 5;
+        height:50px;
+        background-color: lightblue;
+        text-align: center;    
+    }
+    .sb3{
+        display:flex;
+        grid-column-start: 5;
+        grid-column-end: 7;  
+        height:50px;  
+        background-color: lightblue;
+        text-align: center;
+    
+    }
+    .promotion{
+        position: relative;
+        line-height: 50px;
+        left:15px;
+    }
+    .sp{
+        width:80px;
+        height:50px;
+    }
+    
+    /*big boxes*/
+    .lb1,.lb2,.lb3,.lb4,.lb5,.lb6,.lb7,.lb8,.lb9,.lb10{
+        background-image: url("black-whale.jpg");
+        background-size:cover;
+        background-position:center;
+    }
+    
+    .lb1{
+        grid-column-start:1;
+        grid-column-end:3;
+        grid-row-start:2;
+        grid-row-end:5;
+        position: relative;
+    }
+    
+    .lb1::before {
+        content: "Title 1";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    
+    
+    .lb2{
+        grid-column-start:3;
+        grid-column-end:4;
+        grid-row-start:2;
+        grid-row-end:5;
+        position: relative;
+    }
+    
+    .lb2::before {
+        content: "Title 2";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb3{
+        grid-column-start:4;
+        grid-column-end:5;
+        grid-row-start:2;
+        grid-row-end:5;
+        position: relative;
+    }
+    .lb3::before {
+        content: "Title 3";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb4{
+        grid-column-start:5;
+        grid-column-end:6;
+        grid-row-start:2;
+        grid-row-end:5;
+        position: relative;
+    }
+    .lb4::before {
+        content: "Title 4";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb5{
+        grid-column-start:6;
+        grid-column-end:7;
+        grid-row-start:2;
+        grid-row-end:5;
+        position: relative;
+    }
+    .lb5::before {
+        content: "Title 5";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb6{
+        grid-column-start:1;
+        grid-column-end:3;
+        grid-row-start:5;
+        grid-row-end:8;
+        position: relative;
+    }
+    .lb6::before {
+        content: "Title 6";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb7{
+        grid-column-start:3;
+        grid-column-end:4;
+        grid-row-start:5;
+        grid-row-end:8;
+        position: relative;
+    }
+    .lb7::before {
+        content: "Title 7";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb8{
+        grid-column-start:4;
+        grid-column-end:5;
+        grid-row-start:5;
+        grid-row-end:8;
+        position: relative;
+    }
+    .lb8::before {
+        content: "Title 8";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb9{
+        grid-column-start:5;
+        grid-column-end:6;
+        grid-row-start:5;
+        grid-row-end:8;
+        position: relative;
+    }
+    .lb9::before {
+        content: "Title 9";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
+    }
+    .lb10{
+        grid-column-start:6;
+        grid-column-end:7;
+        grid-row-start:5;
+        grid-row-end:8;
+        position: relative;
+    }
+    .lb10::before {
+        content: "Title 10";
+        position: absolute;
+        bottom: 0;/*title放在最下面*/
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(180, 235, 102, 0.5);
+        padding: 5px;
+        width:100%;/*title背景寬度=容器寬度*/
+        text-align: center;
+        box-sizing: border-box; /*title的內邊距與邊框不影響容器寬度*/
     }
 }
