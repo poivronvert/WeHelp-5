@@ -145,7 +145,7 @@ def func(*data):
         """取得人名的中間名
 
         Args:
-            name (str): 中文人名，例如：陳水扁
+            name (str): 中文人名
 
         Returns:
             str: 中間名
