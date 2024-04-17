@@ -61,7 +61,7 @@ merged_list = merged_dict.values()
 csv_file = "spot.csv"
 fieldnames = ["SpotTitle","District","Longitude","Latitude","ImageURL"]
 
-with open(csv_file, 'w', newline='') as file:
+with open(csv_file, 'w', newline='',encoding="utf-8") as file:
     writer = csv.DictWriter(file, fieldnames = fieldnames)
     # 寫入csv的標題(column)
     writer.writeheader()
@@ -76,6 +76,33 @@ with open(csv_file, 'w', newline='') as file:
             "ImageURL":row["filelist"]
         }
         writer.writerow(new_row)
+
+# group by MRT
+
+mrt_spot_dict:dict[str, list] = {}
+
+print(merged_list) 
+for item in merged_list:
+    mrt = item["MRT"]
+    spot = item["stitle"]
+    if mrt in mrt_spot_dict.keys(): #mrt在字典裡則把spot按照key放到value後面
+       mrt_spot_dict[mrt].append(spot)
+    else:
+       mrt_spot_dict[mrt] = [spot,] #mrt不在字典裡則把key:mrt, value = [spot]新增到字典
+
+
+# 寫入到csv
+mrt_csv_file = "mrt.csv" #建立一個mrt.csv
+
+with open(mrt_csv_file,'w',newline="",encoding="utf-8") as file:
+    fieldnames = ["MRT","stitle"]
+    writer = csv.DictWriter(file, fieldnames=fieldnames)
+    writer.writeheader()
+
+    for station,spots in mrt_spot_dict.items():
+        writer.writerow({'MRT':station, "stitle":", ".join(spots)})
+
+
 
 
 
