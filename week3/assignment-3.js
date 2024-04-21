@@ -8,19 +8,21 @@ function getData(startIndex, count){
         })
         .then(function(resp) {
             let results = resp.data.results;
-            console.log(results.legth)
+            
             
         for (let i=startIndex; i<startIndex+count;i++){
-            if (i>=results.legth) {
+            if (i>=results.length) {
                 let loadMoreButton = document.querySelector("#load");
                 loadMoreButton.style.display = "none";
                 break;
             }
             let result =results[i]
-            let className = (i < 3) ? "sb" : ((i%5===3 && i<=13) ||((i-3)%5===3 && i>13)) ? "lb" : "mb";
+            let className = (i < 3) ? "sb" : ((i % 5 === 3 && i <= 13) || ((i - 3) % 5 === 3 && i > 13)) ? "lb" : "mb";
             appendSpot(result,className)
+
             }
         currentCount += count;
+        
         });
 }
 
