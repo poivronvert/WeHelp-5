@@ -84,7 +84,6 @@ with open(csv_file, 'w', newline='',encoding="cp950") as file:
 
 mrt_spot_dict:dict[str, list] = {}
 
-print(merged_list) 
 for item in merged_list:
     mrt = item["MRT"]
     spot = item["stitle"]
@@ -93,17 +92,17 @@ for item in merged_list:
     else:
        mrt_spot_dict[mrt] = [spot,] #mrt不在字典裡則把key:mrt, value = [spot]新增到字典
 
+print(mrt_spot_dict)
 
 # 寫入到csv
-mrt_csv_file = "mrt.csv" #建立一個mrt.csv
+mrt_csv_file = "mrt.csv" 
 
 with open(mrt_csv_file,'w',newline="",encoding="cp950") as file: # 編碼要用cp950，excel才不會顯示亂碼
-    fieldnames = ["MRT","stitle"]
-    writer = csv.DictWriter(file, fieldnames=fieldnames)
-    writer.writeheader()
+    writer = csv.writer(file)
+    writer.writerow(['MRT','Spots'])
 
     for station,spots in mrt_spot_dict.items():
-        writer.writerow({'MRT':station, "stitle":", ".join(spots)})
+        writer.writerow([station]+spots)
 
 
 # Task 2
