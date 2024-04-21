@@ -64,7 +64,7 @@ merged_list = merged_dict.values()
 csv_file = "spot.csv"
 fieldnames = ["SpotTitle","District","Longitude","Latitude","ImageURL"]
 
-with open(csv_file, 'w', newline='',encoding="cp950") as file:
+with open(csv_file, 'w', newline='',encoding="utf-8") as file:
     writer = csv.DictWriter(file, fieldnames = fieldnames)
     # 寫入csv的標題(column)
     writer.writeheader()
@@ -97,7 +97,7 @@ print(mrt_spot_dict)
 # 寫入到csv
 mrt_csv_file = "mrt.csv" 
 
-with open(mrt_csv_file,'w',newline="",encoding="cp950") as file: # 編碼要用cp950，excel才不會顯示亂碼
+with open(mrt_csv_file,'w',newline="",encoding="utf-8") as file: # 編碼要用cp950，excel才不會顯示亂碼
     writer = csv.writer(file)
     writer.writerow(['MRT','Spots'])
 
