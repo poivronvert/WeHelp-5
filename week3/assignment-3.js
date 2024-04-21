@@ -1,10 +1,14 @@
 const URL = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
-let currentCount = 13;
-
+var currentCount = 13;
+/**
+ * fetch url and get spot info; define class type for small, medium, large picture
+ * @param {Number} startIndex determin the start index of spots to render 
+ * @param {Number} count determin the start index of spots to render 
+ */
 function getData(startIndex, count){
     fetch(URL)
         .then(function(response) {
-            return response.json(); //解析成一個json物件
+            return response.json(); 
         })
         .then(function(resp) {
             let results = resp.data.results;
@@ -14,35 +18,47 @@ function getData(startIndex, count){
             if (i>=results.length) {
                 let loadMoreButton = document.querySelector("#load");
                 loadMoreButton.style.display = "none";
-                break;
+                return;
             }
             let result =results[i]
-            let className = (i < 3) ? "sb" : ((i % 5 === 3 && i <= 13) || ((i - 3) % 5 === 3 && i > 13)) ? "lb" : "mb";
+            let className = '';
+            if (i<3) {
+                className = 'sb';
+            }else if((i===3) || (i-3)%5===0){
+                className = 'lb';
+            }else{
+                className = 'mb';
+            }
+        
             appendSpot(result,className)
 
             }
-        currentCount += count;
+        if (startIndex!==0)currentCount += count;
         
         });
 }
-
+/**
+ * render the spot names and pictures to divs
+ * @param {list} result fetched data
+ * @param {str} className defined style to apply
+ */
 function appendSpot(result,className){
-    //創建包含圖片和景點名稱的父容器div，並套用class
+
     let parentDiv = document.createElement('div');
     parentDiv.className = className;
     
-    // 創建圖片元素
+
     let spotImage = document.createElement('img');
     spotImage.src = "https://" + result.filelist.split("https://")[1];
 
-    //添加到父容器中
+
     parentDiv.appendChild(spotImage);
 
-    //創建景點名稱元素
+
     let spotName = document.createElement('div');
     spotName.textContent = result.stitle;
 
-    //添加到父容器中
+
     parentDiv.appendChild(spotName);
 
     if(className === "lb"|| className === "mb"){
@@ -52,7 +68,7 @@ function appendSpot(result,className){
         parentDiv.appendChild(starImage);
     }
 
-    // 將父容器添加到容器中
+
     let container = document.querySelector(".content .container");
     container.appendChild(parentDiv);
 }
@@ -61,10 +77,9 @@ function appendSpot(result,className){
 document.addEventListener('DOMContentLoaded',function(){
     getData(0,currentCount);
 
-    let loadMoreButton = document.querySelector('#load');
-        loadMoreButton.addEventListener('click',function() {
-            let newCount = 10;
-            getData(currentCount,newCount);
-    });
-
+});
+let loadMoreButton = document.querySelector('#load')
+loadMoreButton.addEventListener('click',function() {
+    let newCount = 10;
+    getData(currentCount,newCount);
 });
