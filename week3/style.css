@@ -44,6 +44,7 @@ body{ /*設定字型、統一設定margin及padding*/
 .mb img, .lb img{
     width: 100%;
     height: 100%;
+    object-fit: cover;
     overflow: hidden;
 }
 
@@ -82,7 +83,7 @@ body{ /*設定字型、統一設定margin及padding*/
 .sb img, .sb2 img{
     width:80px;
     height: 50px;
-    object-fit: cover;
+    object-fit: contain;
     margin-right: 10px;
 }
 
