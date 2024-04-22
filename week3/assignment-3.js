@@ -1,9 +1,10 @@
 const URL = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1"
 var currentCount = 13;
+
 /**
- * fetch url and get spot info; define class type for small, medium, large picture
- * @param {Number} startIndex determin the start index of spots to render 
- * @param {Number} count determin the start index of spots to render 
+ * fetch data from the specified URL and render spot information based on startIndex
+ * @param {Number} startIndex The start index of spots to render
+ * @param {Number} count The number of spots to render
  */
 function getData(startIndex, count){
     fetch(URL)
@@ -21,15 +22,8 @@ function getData(startIndex, count){
                 return;
             }
             let result =results[i]
-            let className = '';
-            if (i<3) {
-                className = 'sb';
-            }else if((i===3) || (i-3)%5===0){
-                className = 'lb';
-            }else{
-                className = 'mb';
-            }
-        
+            let className = determineClassName(i);
+
             appendSpot(result,className)
 
             }
@@ -38,9 +32,39 @@ function getData(startIndex, count){
         });
 }
 /**
- * render the spot names and pictures to divs
- * @param {list} result fetched data
- * @param {str} className defined style to apply
+ * Determine the className based on the current viewport width and index
+ * @param {number} i The index of spots
+ * @returns The determined className
+ */
+function determineClassName(i){
+    const width = window.innerWidth;
+    if (width >600 && width <=1200){
+        if (i<2) {
+            return 'sb';
+        } else if (i===2) {
+            return 'sb2';
+        } else if ((i%10===1)||(i%10===2)) {
+            return 'lb';
+        } else {
+            return 'mb';
+        }
+    // console.log("601px < width <=1200px")
+    } else{
+        if (i<3) {
+            return 'sb';
+        }else if((i===3) || (i-3)%5===0){
+            return 'lb';
+        }else{
+            return 'mb';
+        }
+    // console.log("其他範圍")
+    }
+}
+
+/**
+ * Render the spot names and pictures to divs
+ * @param {list} result The fetched data of spots
+ * @param {str} className The determined clasName for styling
  */
 function appendSpot(result,className){
 
@@ -71,13 +95,19 @@ function appendSpot(result,className){
 
     let container = document.querySelector(".content .container");
     container.appendChild(parentDiv);
+    
 }
 
+window.addEventListener('resize', function() {
+    let container = document.querySelector(".content .container");
+    container.innerHTML = '';
+    getData(0, currentCount);
+});
 
 document.addEventListener('DOMContentLoaded',function(){
     getData(0,currentCount);
-
 });
+
 let loadMoreButton = document.querySelector('#load')
 loadMoreButton.addEventListener('click',function() {
     let newCount = 10;

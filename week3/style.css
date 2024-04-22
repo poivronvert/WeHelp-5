@@ -16,6 +16,10 @@ body{ /*設定字型、統一設定margin及padding*/
     line-height: 250px;/*div高=行距高實現垂直對齊*/
 }
 
+.header{
+    display:flex;/*header下方子元件要水平排列*/
+    justify-content: space-between;/*子元件各靠左及靠右對齊*/
+}
 .btn {
     background-color: lightgray;
     border: 1px black solid;
@@ -30,14 +34,203 @@ body{ /*設定字型、統一設定margin及padding*/
     input#menu {
         display: none;
 }
+.mb, .lb{
+    position:relative;
+    display: flex;
+    align-items: flex-end;
+    height: 20vh;
+    overflow: hidden;
+}
+.mb img, .lb img{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
+.mb img.star, .lb img.star{
+    position: absolute;
+    top:10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    transform: translate(50%,-50%);
+    z-index: 3;
+}
+.mb div,.lb div{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap; /*禁止文字換行*/
+    text-overflow: ellipsis; /*隱藏的文字以...替代*/
+    overflow: hidden; /*隱藏換行文字*/
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+    flex:1;
+}
+
+.sb, .sb2{
+    display: flex;
+    background-color: lightblue;
+}
+.sb div, .sb2 div{
+    margin-top: 0px;
+    align-self: center;
+
+}
+.sb img, .sb2 img{
+    width:80px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/*螢幕尺寸為600px(含)以下*/
+@media (width<=600px){
+    .content{
+        margin-top: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        width:90%;
+        display:grid;
+        grid-gap:20px;
+        grid-template-columns:1fr;
+    }
+    /*選單線*/
+    .line {
+        width: 24px;
+        height: 24px;
+        background: #FFF;
+        cursor: pointer;
+        display: block;
+        position: fixed;
+        right:5px;
+        top:5px;
+        padding: 6px;
+        z-index:2;
+    }
+    .line .menu,
+    .line .menu::before,
+    .line .menu::after {
+        background: #222;
+        content: '';
+        display: block;
+        height: 1px;
+        position: absolute;
+        transition: background ease .3s,top ease .3s .3s, transform ease .3s;
+        width: 20px;
+    }
+    
+    .line .menu{
+        left:10px;
+        top:27px;
+    }
+    .line .menu::before {
+        top:-6px;
+    }
+    
+    .line .menu::after {
+        top: 6px;
+    }
+    /*點選選單變叉叉*/
+    #menu:checked + .line .menu {
+        background: transparent;
+    }
+    
+    #menu:checked + .line .menu::before {
+        transform: rotate(45deg);
+    }
+    
+    #menu:checked + .line .menu::after {
+        transform: rotate(-45deg);
+    }
+    
+    #menu:checked + .line .menu::before,
+    #menu:checked + .line .menu::after {
+        top: 0;
+        transition: top ease .3s, transform ease .3s .3s;
+    }
+    
+    /*選單開合*/
+    #menu:checked ~ .items {
+        width: 200px;
+        right: 0;
+    }
+    
+    .items {
+        height: 100vh;
+        background: #FFF;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        padding-top: 60px;
+        position: fixed;
+        z-index: 1;
+        transition: all .6s;
+        overflow: hidden;
+        width:0;
+        right:-200px;
+        top:0;
+        display:flex;
+        flex-direction: column; 
+        align-items: center;
+
+    }
+    /*選單向外推*/
+    .items div{
+        margin-right:100px;
+        padding: 0;
+    }
+    .items div>p{
+        display:block;
+        width:100px;
+    }
+
+    .sb, .sb2, .mb, .lb{
+        grid-column: span 1;
+    }
+}
+/*螢幕尺寸為601px-1200px(含)以下*/
+@media (600px < width <=1200px){
+    .content{
+        margin-top: 1%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        width: 90%;
+        display:grid;
+        grid-gap:20px;
+        grid-template-columns: repeat(4,1fr);
+    }
+    .items{
+        display:flex;/*items要水平排列*/
+        align-content: flex-end;/*items靠右對齊*/
+    }
+    .item{
+        padding:0 10px;/*設定內邊距*/
+    }
+    .sb{
+        grid-column: span 2;
+    }
+
+    .sb2{
+        grid-column: span 4;
+    }
+    .mb{
+        grid-column: span 1;
+    }
+
+    .lb{
+        grid-column: span 2;
+    }
+}
 
 /*螢幕尺寸為1201px以上*/
-@media (device-width>1201px){
-    .header{
-        display:flex;/*header下方子元件要水平排列*/
-        justify-content: space-between;/*子元件各靠左及靠右對齊*/
-    }
+@media (width>1200px){
     .content{
         margin-top: 1%;
         display: flex;
@@ -57,26 +250,9 @@ body{ /*設定字型、統一設定margin及padding*/
     .item{
         padding:0 10px;/*設定內邊距*/
     }
-
-    /*small boxes*/
     .sb{
-        display: flex;
-        background-color: lightblue;
         grid-column: span 2;
-
     }
-    .sb div{
-        margin-top: 0px;
-        align-self: center;
-
-    }
-    .sb img{
-        width:80px;
-        height: 50px;
-        object-fit: cover;
-        margin-right: 10px;
-    }
-
     .mb{
         grid-column: span 1;
     }
@@ -84,41 +260,4 @@ body{ /*設定字型、統一設定margin及padding*/
     .lb{
         grid-column: span 2;
     }
-
-    .mb, .lb{
-        position:relative;
-        display: flex;
-        align-items: flex-end;
-        height: 20vh;
-        overflow: hidden;
-    }
-    .mb img, .lb img{
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    .mb img.star, .lb img.star{
-        position: absolute;
-        top:10px;
-        right: 10px;
-        width: 10px;
-        height: 10px;
-        transform: translate(50%,-50%);
-        z-index: 1;
-    }
-    .mb div,.lb div{
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.5);
-        white-space: nowrap; /*禁止文字換行*/
-        text-overflow: ellipsis; /*隱藏的文字以...替代*/
-        overflow: hidden; /*隱藏換行文字*/
-        padding: 0 10px;
-        box-sizing: border-box;
-        text-align: center;
-        flex:1;
-    }
-
 }
