@@ -10,30 +10,36 @@
     <!--連結stylecss設定-->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-    <div class="header">
-        <p class="title">My Website</p>
+    <header class="header">
+        <div class="title">My Website</div>
         <input type="checkbox" id="menu">
         <label for="menu" class="line">
             <div class="menu"></div>
         </label>
-    
         <div class="items">
-            <p class="item">Item 1</p>
-            <p class="item">Item 2</p>
-            <p class="item">Item 3</p>
-            <p class="item">Item 4</p>
+            <div>Item 1</div>
+            <div>Item 2</div>
+            <div>Item 3</div>
+            <div>Item 4</div>
         </div>
-    </div>
-    <div class="greeting">Welcome to MyHome</div>
-    <div class="content">
-        <div class="container"></div>
-    </div>
-    <div class="content">
-        <span id="load" class="btn">Load More</span>
-    </div>
+    </header>
+    <main>
+        <article>
+            <div>
+                <h1 class="articleHeader">Welcome to MyHome</h1>
+            </div>
+            <div class="container">
+                <div class = "articleBody">
+                    <div class = "first3Spots"></div>
+                    <div class = "otherSpots"></div>
+                </div>
+            </div>
+        </article>
+        <section>
+            <span id="load" class="buttonLoad">Load More</span>
+        </section>
+    </main>
     <script src="assignment-3.js"></script>
 </body>
-
 </html>
