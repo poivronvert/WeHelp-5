@@ -1,0 +1,36 @@
+{% extends "base.html"%}
+{% block head%}
+    {% block title %}Signin{% endblock title%}
+    
+{% endblock head%}
+
+{% block header%}
+歡迎光臨，請輸入帳號密碼
+{% endblock header%}
+
+{% block content%}
+    <h3>登入系統</h3>
+    <form method='post' action="/signin" onsubmit="return check()">
+        <div class="block">
+            <label>帳號
+                <input type="text" name="username">
+            </label>
+        </div>
+        <div class="block">
+            <label>密碼
+            <input type="password" name="password">
+            </label>
+        </div>
+        <div class="block">
+            <label>同意條款
+                <input class="consentButton" type="checkbox" id="consent" name="consent">
+            </label>
+        </div>
+        <div class="block">
+            <label>
+                <input class="submitButton" type="submit" name="signin" value="登入">
+            </label>
+            
+        </div>
+    </form>
+{% endblock content%}
