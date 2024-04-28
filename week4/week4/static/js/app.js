@@ -6,3 +6,14 @@ function check() {
         return false;
     }
 }
+
+function calc() {
+    let input = parseFloat(document.getElementById("number_input").value);
+    if (input>0) {
+        window.location.href = `/square/${input}`;
+        return false;
+    }else{
+        alert("Please enter a positive number");
+        return false;
+    }
+}

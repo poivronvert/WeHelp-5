@@ -1,4 +1,5 @@
 import logging
+import os
 
 from fastapi import FastAPI, Request, Response, HTTPException,status
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -7,13 +8,18 @@ from starlette.middleware.sessions import SessionMiddleware
 from fastapi.templating import Jinja2Templates
 
 from week4.routers.login import router
+from week4 import static
+from week4 import templates
 
-templates = Jinja2Templates(directory="templates")
+STATIC_PATH:os.PathLike = os.path.realpath(os.path.dirname(static.__file__))
+TEMPLATES_PATH:os.PathLike = os.path.realpath(os.path.dirname(templates.__file__))
+templates = Jinja2Templates(directory=TEMPLATES_PATH)
+
 
 log = logging.getLogger()
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_PATH), name="static")
 app.include_router(router, )
 
 app.add_middleware(SessionMiddleware, secret_key="secret_key")

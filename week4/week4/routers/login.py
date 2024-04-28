@@ -1,4 +1,7 @@
 import logging
+import os
+
+from week4 import templates
 
 from fastapi import HTTPException, Request, Response, status, Form, APIRouter
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -9,9 +12,9 @@ __all__ = ['router',]
 
 log = logging.getLogger()
 router = APIRouter(tags=['login', ])
+TEMPLATES_PATH:os.PathLike = os.path.realpath(os.path.dirname(templates.__file__))
 
-
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory=TEMPLATES_PATH)
 
 @router.get("/", response_class=HTMLResponse)
 async def root(*, request: Request, response: Response):
@@ -30,7 +33,7 @@ async def root(*, request: Request, response: Response):
     try:
 
         return templates.TemplateResponse(
-            request=request, name="index.html", context={"request": request}
+            request=request, name='index.html', context={"request": request}
         )
     except Exception as e:
         log.error(e, exc_info=True)
@@ -94,5 +97,12 @@ async def get_error_msg(*, message: str | None = 'Default Error Message', reques
         log.error(e, exc_info=True)
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     
-
+@router.get("/square/{number_input}")
+async def calculate_square(*, number_input:int, request: Request):
+    try:
+        squared_number = number_input**2
+        return templates.TemplateResponse("calculator.html", {"request": request, "squared_number": squared_number})
+    except Exception as e:
+        log.error(e, exc_info=True)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 

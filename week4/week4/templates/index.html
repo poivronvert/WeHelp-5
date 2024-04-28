@@ -30,7 +30,21 @@
             <label>
                 <input class="submitButton" type="submit" name="signin" value="登入">
             </label>
-            
         </div>
     </form>
+    <hr>
+    <h3>計算正整數的平方</h3>
+    <form id='calcform' method='get' onsubmit='return calc()' action="">
+        <div class="block">
+            <label>正整數
+                <input type='number' id="number_input" name="number_input">
+            </label>
+        </div>
+        <div class="block">
+            <label>
+                <input class="calcButton" type="submit" value="計算">
+            </label>
+        </div>
+    </form>
+
 {% endblock content%}

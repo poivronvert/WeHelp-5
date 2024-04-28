@@ -3,3 +3,7 @@ Log
 week2/Assignment_-_Week_2.pdf
 week1/Assignment_-_Week_1.pdf
 week3/Assignment_-_Week_3.pdf
+__pycache__
+*.bak
+week3/.vscode/launch.json
+week4/Assignment_-_Week_4.pdf
