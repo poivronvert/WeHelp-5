@@ -139,7 +139,7 @@ WHERE website.member.username = 'test';
 SELECT website.member.username, AVG(website.message.like_count) AS average_likes
 FROM website.message
 JOIN website.member ON website.message.member_id = website.member.id
-GROUP BY website.member.username
+GROUP BY website.member.username;
 ```
 ![alt text](image-18.png)
 
