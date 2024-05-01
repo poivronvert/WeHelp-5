@@ -1,222 +1,84 @@
+-- MySQL dump 10.13  Distrib 8.4.0, for Linux (aarch64)
 --
--- PostgreSQL database dump
---
+-- Host: localhost    Database: website
+-- ------------------------------------------------------
+-- Server version	8.4.0
 
--- Dumped from database version 15.3 (Debian 15.3-1.pgdg110+1)
--- Dumped by pg_dump version 15.3 (Debian 15.3-1.pgdg110+1)
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: website; Type: SCHEMA; Schema: -; Owner: demodb01
---
-
-CREATE SCHEMA website;
-
-
-ALTER SCHEMA website OWNER TO demodb01;
-
-SET default_tablespace = '';
-
-SET default_table_access_method = heap;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Name: member; Type: TABLE; Schema: website; Owner: demodb01
+-- Table structure for table `member`
 --
 
-CREATE TABLE website.member (
-    id bigint NOT NULL,
-    name character varying(255) NOT NULL,
-    username character varying(255) NOT NULL,
-    password character varying(255) NOT NULL,
-    follower_count integer DEFAULT 0 NOT NULL,
-    "time" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    CONSTRAINT member_follower_count_check CHECK ((follower_count >= 0))
-);
-
-
-ALTER TABLE website.member OWNER TO demodb01;
-
---
--- Name: COLUMN member.id; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.member.id IS 'Unique ID';
-
+DROP TABLE IF EXISTS `member`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `member` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
+  `name` varchar(255) NOT NULL COMMENT 'Name',
+  `username` varchar(255) NOT NULL COMMENT 'Username',
+  `password` varchar(255) NOT NULL COMMENT 'Password',
+  `follower_count` int unsigned NOT NULL DEFAULT '0' COMMENT 'Follower Count',
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Signup Time',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: COLUMN member.name; Type: COMMENT; Schema: website; Owner: demodb01
+-- Dumping data for table `member`
 --
 
-COMMENT ON COLUMN website.member.name IS 'Name';
-
-
---
--- Name: COLUMN member.username; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.member.username IS 'Username';
-
+LOCK TABLES `member` WRITE;
+/*!40000 ALTER TABLE `member` DISABLE KEYS */;
+INSERT INTO `member` VALUES (1,'test2','test','test',1,'2024-05-01 09:58:26'),(2,'Apple','apple','123',2,'2024-05-01 09:58:29'),(3,'Banana','banana','123',3,'2024-05-01 09:58:29'),(4,'Kiwi','kiwi','123',4,'2024-05-01 09:58:29'),(5,'Grape','grape','123',5,'2024-05-01 09:58:29');
+/*!40000 ALTER TABLE `member` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Name: COLUMN member.password; Type: COMMENT; Schema: website; Owner: demodb01
+-- Table structure for table `message`
 --
 
-COMMENT ON COLUMN website.member.password IS 'Password';
-
-
---
--- Name: COLUMN member.follower_count; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.member.follower_count IS 'Follower Count';
-
-
---
--- Name: COLUMN member."time"; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.member."time" IS 'Signup Time';
-
+DROP TABLE IF EXISTS `message`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `message` (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT 'Unique ID',
+  `member_id` bigint NOT NULL COMMENT 'Member ID for Message Sender',
+  `content` varchar(255) NOT NULL COMMENT 'Content',
+  `like_count` int unsigned NOT NULL DEFAULT '0' COMMENT 'Like Count',
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Publish Time',
+  PRIMARY KEY (`id`),
+  KEY `member_id` (`member_id`),
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: member_id_seq; Type: SEQUENCE; Schema: website; Owner: demodb01
+-- Dumping data for table `message`
 --
 
-ALTER TABLE website.member ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME website.member_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+INSERT INTO `message` VALUES (1,1,'hello',10,'2024-05-01 09:59:10'),(2,2,'hello',20,'2024-05-01 09:59:10'),(3,3,'hello',30,'2024-05-01 09:59:10'),(4,4,'hello',40,'2024-05-01 09:59:10'),(5,5,'hello',50,'2024-05-01 09:59:10');
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
---
--- Name: message; Type: TABLE; Schema: website; Owner: demodb01
---
-
-CREATE TABLE website.message (
-    id bigint NOT NULL,
-    member_id bigint NOT NULL,
-    content character varying(255) NOT NULL,
-    like_count integer DEFAULT 0 NOT NULL,
-    "time" timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    CONSTRAINT message_like_count_check CHECK ((like_count >= 0))
-);
-
-
-ALTER TABLE website.message OWNER TO demodb01;
-
---
--- Name: COLUMN message.id; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.message.id IS 'Unique ID';
-
-
---
--- Name: COLUMN message.member_id; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.message.member_id IS 'Member ID for Message Sender';
-
-
---
--- Name: COLUMN message.content; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.message.content IS 'Content';
-
-
---
--- Name: COLUMN message."time"; Type: COMMENT; Schema: website; Owner: demodb01
---
-
-COMMENT ON COLUMN website.message."time" IS 'Publish Time';
-
-
---
--- Name: message_id_seq; Type: SEQUENCE; Schema: website; Owner: demodb01
---
-
-ALTER TABLE website.message ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
-    SEQUENCE NAME website.message_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1
-);
-
-
---
--- Data for Name: member; Type: TABLE DATA; Schema: website; Owner: demodb01
---
-
-COPY website.member (id, name, username, password, follower_count, "time") FROM stdin;
-2	Apple	apple	123	2	2024-04-29 08:03:08.2573
-3	Banana	banaba	123	3	2024-04-29 08:03:08.2573
-4	Kiwi	kiwi	123	4	2024-04-29 08:03:08.2573
-5	Grape	grape	123	5	2024-04-29 08:03:08.2573
-1	test2	test	test	1	2024-04-29 07:59:51.130845
-\.
-
-
---
--- Data for Name: message; Type: TABLE DATA; Schema: website; Owner: demodb01
---
-
-COPY website.message (id, member_id, content, like_count, "time") FROM stdin;
-2	1	Hello	10	2024-04-30 07:36:32.190429
-3	2	Hello	20	2024-04-30 07:36:32.190429
-4	3	Hello	30	2024-04-30 07:36:32.190429
-5	4	Hello	40	2024-04-30 07:36:32.190429
-6	5	Hello	50	2024-04-30 07:36:32.190429
-\.
-
-
---
--- Name: member_id_seq; Type: SEQUENCE SET; Schema: website; Owner: demodb01
---
-
-SELECT pg_catalog.setval('website.member_id_seq', 5, true);
-
-
---
--- Name: message_id_seq; Type: SEQUENCE SET; Schema: website; Owner: demodb01
---
-
-SELECT pg_catalog.setval('website.message_id_seq', 6, true);
-
-
---
--- Name: member member_pkey; Type: CONSTRAINT; Schema: website; Owner: demodb01
---
-
-ALTER TABLE ONLY website.member
-    ADD CONSTRAINT member_pkey PRIMARY KEY (id);
-
-
---
--- Name: message message_pkey; Type: CONSTRAINT; Schema: website; Owner: demodb01
---
-
-ALTER TABLE ONLY website.message
-    ADD CONSTRAINT message_pkey PRIMARY KEY (id);
-
-
---
--- PostgreSQL database dump complete
---
-
+-- Dump completed on 2024-05-01 10:57:05
