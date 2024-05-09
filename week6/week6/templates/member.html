@@ -1,0 +1,39 @@
+{% extends "base.html"%}
+{% block head%}
+    {% block title %}Member{% endblock title%}
+    
+{% endblock head%}
+
+{% block header%}
+歡迎光臨，這是會員頁
+{% endblock header%}
+
+{% block content%}
+    <h3>{{ name }}，歡迎登入系統</h3>
+    <a href="/signout">登出系統</a> 
+    <hr>
+    <form method='post' action="/createMessage">
+        <div class="block">
+            <label>內容
+                <input type='text' id="message_input" name="message_input">
+            </label>
+        </div>
+        <div class="block">
+            <label>
+                <input class="Button" type="submit" name="message_post" value="送出">
+            </label>
+        </div>        
+    </form>
+    <hr>
+    <div>
+    {%- for message in messages%}
+        <div>
+            <div> {{ message[1] }}： {{ message[2] }}
+            {% if member_id == message[0]%}
+                <button messageid="{{ message[3] }}" class="Button" style="margin-left:5px;padding:0px 2px" onclick="confirmDelete(this)">x</button>
+            {% endif %} 
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock content%}

@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "week5-extra"
+version = "0.1.0"
+description = ""
+authors = ["AliceKuo <ming-chieh.kuo@outlook.com>"]
+readme = "README.md"
+packages = [{include = "week5_extra"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mysql-connector = "^2.2.9"
+sqlalchemy = "^2.0.29"
+3 = "^0.0.0"
+python-dotenv = "^1.0.1"
+pymysql = "^1.1.0"
+cryptography = "^42.0.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,48 @@
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+h1 {
+    font-size: 2em;
+}
+header {
+    display: flex;
+    background-color: #337AB0;
+    width: 100%;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+input {
+    margin: 0 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.content {
+    width: 100%;
+}
+
+.block{
+    margin: 20px 0;
+}
+.consentButton{
+    width: 20px;
+    height:20px;
+}
+.Button{
+    font-size: 20px;
+    padding: 5px;
+}

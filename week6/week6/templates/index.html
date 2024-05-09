@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+{% block head%}
+    {% block title %}Home{% endblock title%}
+    
+{% endblock head%}
+
+{% block header%}
+歡迎光臨，請註冊登入系統
+{% endblock header%}
+
+{% block content%}
+    <h3>註冊帳號</h3>
+    <form id='signform' method='post' action="/signup">
+        <div class="block">
+            <label>姓名
+                <input type='text' id="signup_name" name="signup_name" required>
+            </label>
+        </div>
+        <div class="block">
+            <label>帳號
+                <input type='text' id="signup_username" name="signup_username" required>
+            </label>
+        </div>
+        <div class="block">
+            <label>密碼
+                <input type='password' id="signup_password" name="signup_password" required>
+            </label>
+        </div>                
+        <div class="block">
+            <label>
+                <input class="Button" type="submit" value="註冊">
+            </label>
+        </div>
+    </form>
+<hr>
+    <h3>登入系統</h3>
+    <form method='post' action="/signin" onsubmit="return check()">
+        <div class="block">
+            <label>帳號
+                <input type="text" name="username" required>
+            </label>
+        </div>
+        <div class="block">
+            <label>密碼
+            <input type="password" name="password" required>
+            </label>
+        </div>
+        <div class="block">
+            <label>同意條款
+                <input class="consentButton" type="checkbox" id="consent" name="consent">
+            </label>
+        </div>
+        <div class="block">
+            <label>
+                <input class="Button" type="submit" name="signin" value="登入">
+            </label>
+        </div>
+    </form>
+{% endblock content%}

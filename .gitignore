@@ -7,3 +7,6 @@ __pycache__
 *.bak
 week3/.vscode/launch.json
 week4/Assignment_-_Week_4.pdf
+week5-extra/.env
+week6/.env
+.DS_Store
