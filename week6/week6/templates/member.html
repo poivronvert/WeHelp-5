@@ -28,9 +28,13 @@
     <div>
     {%- for message in messages%}
         <div>
-            <div> {{ message[1] }}： {{ message[2] }}
+            <div> {{ message[1] }}： <span class="editable" id="editable_{{ message[3] }}">{{ message[2] }}</span>
+                <input class="editing"  id="editing_{{ message[3] }}" value="{{ message[2] }}">
             {% if member_id == message[0]%}
-                <button messageid="{{ message[3] }}" class="Button" style="margin-left:5px;padding:0px 2px" onclick="confirmDelete(this)">x</button>
+                <button id="editButton_{{ message[3] }}" class="editButton" onclick="editShowHidden('{{ message[3] }}')">修改</button>
+                <button id="deleteButton_{{ message[3] }}" class="deleteButton" messageId="{{ message[3] }}" onclick="confirmDelete(this)">x</button>
+                <button id="editConfirmButton_{{ message[3] }}" class="editConfirmButton" messageId="{{ message[3] }}" onclick="editMsg('{{ message[3] }}')">確認</button>
+                <button id="cancelButton_{{ message[3] }}" class="cancelButton" onclick="cancelEdit('{{ message[3] }}')">取消</button>
             {% endif %} 
             </div>
         </div>

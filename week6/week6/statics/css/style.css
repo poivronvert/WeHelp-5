@@ -46,3 +46,32 @@ input {
     font-size: 20px;
     padding: 5px;
 }
+.editButton{
+    font-size: 20px;
+    padding: 5px;
+    margin-left:5px;
+    padding:0px 2px;
+}
+.deleteButton{
+    font-size: 20px;
+    padding: 5px;
+    margin-left:5px;
+    padding:0px 2px;
+}
+.editConfirmButton {
+    font-size: 20px;
+    padding: 5px;
+    display: none;
+    margin-left:5px;
+    padding:0px 2px;
+}
+.cancelButton {
+    font-size: 20px;
+    padding: 5px;
+    display: none;
+    margin-left:5px;
+    padding:0px 2px;
+}
+.editing {
+    display: none;
+}

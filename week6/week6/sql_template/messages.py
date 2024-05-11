@@ -5,6 +5,7 @@ __all__ = [
     "SHOW_MESSAGE_ALL_ROWS",
     "INS_MESSAGE_SINGLE_ROW",
     "DEL_MESSAGE_SINGLE_ROW",
+    "EDIT_MESSAGE_SINGLE_ROW"
 ]
 
 __DATABASE = "website"
@@ -26,6 +27,14 @@ INS_MESSAGE_SINGLE_ROW = (
 
 DEL_MESSAGE_SINGLE_ROW = (
     f"DELETE FROM {__DATABASE}.{__MESSAGE_TABLE} "
+    "WHERE 1=1 "
+    "AND id=%s "
+    "AND member_id=%s "
+)
+
+EDIT_MESSAGE_SINGLE_ROW = (
+    f"UPDATE {__DATABASE}.{__MESSAGE_TABLE} "
+    "SET content = %s "
     "WHERE 1=1 "
     "AND id=%s "
     "AND member_id=%s "

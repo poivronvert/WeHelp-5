@@ -1,4 +1,3 @@
-import json
 import logging
 import os
 
@@ -9,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 from week6 import templates
 from week6 import sql_template as temp
 from week6.db.connection import get_connection
-from week6.db.schema import DeleteMessageRequest
+from week6.db.schema import DeleteMessageRequest, EditMessageRequest
 
 __all__ = ['router',]
 
@@ -185,7 +184,6 @@ async def create_message(*, message_input: str = Form(), request: Request, respo
     try:
         conn, cursor = get_connection()
         member_id=request.session.get('member_id')
-        print(member_id)
         cursor.execute(temp.INS_MESSAGE_SINGLE_ROW,(member_id,message_input))
         conn.commit()
         return RedirectResponse(url="/member", status_code=status.HTTP_302_FOUND)
@@ -226,4 +224,32 @@ async def delete_message(*, req:DeleteMessageRequest, request: Request, response
         if conn:
             conn.close()
 
+@router.post("/editMessage/")
+async def edit_message(*, req:EditMessageRequest, request: Request, response: Response):
+    conn = None
+    try:
+        message_id = req.message_id
+        content= req.content
+
+        conn, cursor = get_connection()
+        member_id:int = request.session.get('member_id', None)
+        if member_id is None:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+        
+        cursor.execute(temp.EDIT_MESSAGE_SINGLE_ROW,(content, message_id, member_id))
+        edit_row:int = cursor.rowcount
+        conn.commit()
+        if edit_row>0:
+            return status.HTTP_200_OK
+        else:
+            return status.HTTP_304_NOT_MODIFIED
+
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        log.error(e, exc_info=True)
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    finally:
+        if conn:
+            conn.close()
     
