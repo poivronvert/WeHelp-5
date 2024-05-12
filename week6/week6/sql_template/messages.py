@@ -1,4 +1,4 @@
-""" SQL temmplate for MESSAGE CRUD
+""" SQL template for MESSAGE CRUD
 """
 
 __all__ = [

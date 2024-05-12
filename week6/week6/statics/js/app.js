@@ -9,7 +9,7 @@ function check() {
 
 
 function confirmDelete(button) {
-    const messageId = button.getAttribute('messageid');
+    const messageId = button.getAttribute('messageId');
     const confirmed = confirm(`確定要刪除該留言嗎？`);
     if (confirmed) {
         try{
@@ -45,14 +45,14 @@ function deleteMsg(messageId) {
 
 function editShowHidden(messageId) {
     let editButtonToHide = document.getElementById('editButton_'+messageId);
-    let editableToide = document.getElementById('editable_'+messageId);
+    let editableToHide = document.getElementById('editable_'+messageId);
     let deleteButtonToHide = document.getElementById('deleteButton_'+messageId)
     let editingToShow = document.getElementById('editing_'+messageId);
     let editConfirmButtonToShow = document.getElementById('editConfirmButton_'+messageId);
     let cancelButtonToShow = document.getElementById('cancelButton_'+messageId);
     if (editButtonToHide) {
         editButtonToHide.style.display="none";
-        editableToide.style.display="none";
+        editableToHide.style.display="none";
         deleteButtonToHide.style.display="none";
         editingToShow.style.display="inline-block";
         editConfirmButtonToShow.style.display="inline-block";
@@ -62,14 +62,14 @@ function editShowHidden(messageId) {
 
 function cancelEdit(messageId) {
     let editButtonToHide = document.getElementById('editButton_'+messageId);
-    let editableToide = document.getElementById('editable_'+messageId);
+    let editableToHide = document.getElementById('editable_'+messageId);
     let deleteButtonToHide = document.getElementById('deleteButton_'+messageId)
     let editingToShow = document.getElementById('editing_'+messageId);
     let editConfirmButtonToShow = document.getElementById('editConfirmButton_'+messageId);
     let cancelButtonToShow = document.getElementById('cancelButton_'+messageId);
     if (editButtonToHide) {
         editButtonToHide.style.display="inline-block";
-        editableToide.style.display="inline-block";
+        editableToHide.style.display="inline-block";
         deleteButtonToHide.style.display="inline-block";
         editingToShow.style.display="none";
         editConfirmButtonToShow.style.display="none";
