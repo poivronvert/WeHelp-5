@@ -259,7 +259,7 @@ async def query_name(*, username:str=Query(...,), request: Request, response: Re
     try:
         signed_in:int = request.session.get('SIGNED_IN', None)
         if signed_in is None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not signed in")
+            return JSONResponse(content={"data": None})
 
         
         conn, cursor = get_connection()
@@ -299,7 +299,7 @@ async def update_name(*, body:UpdateNameRequest, request: Request, response: Res
         signed_in:int = request.session.get('SIGNED_IN', None)
         member_id = request.session.get('member_id')
         if signed_in is None or member_id is None:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not signed in")
+            return JSONResponse(content={"error": True})
 
         conn, cursor = get_connection()
         try:
