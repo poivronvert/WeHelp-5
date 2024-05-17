@@ -1,0 +1,61 @@
+{% extends "base.html"%}
+{% block head%}
+    {% block title %}Member{% endblock title%}
+    
+{% endblock head%}
+
+{% block header%}
+歡迎光臨，這是會員頁
+{% endblock header%}
+
+{% block content%}
+    <h3>{{ name }}，歡迎登入系統</h3>
+    <a href="/signout">登出系統</a> 
+    <hr>
+    <form method='post' action="/createMessage">
+        <div class="block">
+            <label>內容
+                <input type='text' id="message_input" name="message_input">
+            </label>
+        </div>
+        <div class="block">
+            <label>
+                <input class="Button" type="submit" name="message_post" value="送出">
+            </label>
+        </div>        
+    </form>
+    <hr>
+    <div>
+    {%- for message in messages%}
+        <div>
+            <div> {{ message[1] }}： <span class="editable" id="editable_{{ message[3] }}">{{ message[2] }}</span>
+                <input class="editing"  id="editing_{{ message[3] }}" value="{{ message[2] }}">
+            {% if member_id == message[0]%}
+                <button id="editButton_{{ message[3] }}" class="editButton" onclick="editShowHidden('{{ message[3] }}')">修改</button>
+                <button id="deleteButton_{{ message[3] }}" class="deleteButton" messageId="{{ message[3] }}" onclick="confirmDelete(this)">x</button>
+                <button id="editConfirmButton_{{ message[3] }}" class="editConfirmButton" messageId="{{ message[3] }}" onclick="editMsg('{{ message[3] }}')">確認</button>
+                <button id="cancelButton_{{ message[3] }}" class="cancelButton" onclick="cancelEdit('{{ message[3] }}')">取消</button>
+            {% endif %} 
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    <hr>
+    <div style="margin:20px">
+    <strong>查詢會員姓名</strong>
+    <div style="margin:20px">
+        <input style="margin: 0" type='text' id="queryName">
+        <input style="margin: 0" class="Button" type="submit" onclick="queryName()" value="查詢">
+    <div id="showName">
+
+    </div>
+    <div style="margin:20px">
+    <strong>更新我的姓名</strong>
+    <div style="margin:20px;">
+        <input style="margin: 0" type='text' id="nameUpdate">
+        <input style="margin: 0" class="Button" type="submit" onclick="updateName()" value="更新">
+    </div>
+    <div id="updateMsg">
+
+    </div>
+{% endblock content%}
