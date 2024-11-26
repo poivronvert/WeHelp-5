@@ -1,5 +1,7 @@
 # WeHelp Bootcamp
 
+==HTML==、==CSS==、==JavaScript==、==Python==、==FastAPI==、==MySQL==
+
 ## Weekly Task Overview
 
 ### Week 1: HTML, CSS, and Responsive Web Design (RWD)
