@@ -1,6 +1,6 @@
 # WeHelp Bootcamp
 
-==HTML==、==CSS==、==JavaScript==、==Python==、==FastAPI==、==MySQL==
+*HTML*、*CSS*、*JavaScript*、*Python*、*FastAPI*、*MySQL*
 
 ## Weekly Task Overview
 
